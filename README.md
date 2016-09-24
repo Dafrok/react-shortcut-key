@@ -1,5 +1,5 @@
 # react-shortcut-key
-Hotkey wrapper for react.
+Hotkey wrapper for react components.
 
 # Install
 
