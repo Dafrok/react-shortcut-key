@@ -36,8 +36,7 @@ exports.default = function (keymap) {
         key: 'keyHandler',
         value: function keyHandler(e) {
           var _exec = this.executeShortcut.bind(this, e);
-          var keymap = this.props.keymap;
-          for (var name in this.props.keymap) {
+          for (var name in keymap) {
             _exec({
               keyCode: keymap[name].keyCode,
               fn: keymap[name].fn,
