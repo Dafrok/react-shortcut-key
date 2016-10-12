@@ -14,9 +14,7 @@ export default function (keymap) {
           && (typeof options.ctrl !== 'undefined' ? options.ctrl ? e.ctrlKey : !e.ctrlKey : true)
           && (typeof options.alt !== 'undefined' ? options.alt ? e.altKey : !e.altKey : true)
           && (typeof options.shift !== 'undefined'? options.shift ? e.shiftKey : !e.shiftKey : true)) {
-          options.prevent && e.preventDefault()
-          options.stop && e.stopPropagation()
-          options.fn()
+          options.fn(e)
         }
       }
       keyHandler (e) {

@@ -68,10 +68,10 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var componentOnOk = function componentOnOk() {
+	var componentOnOk = function componentOnOk(e) {
 	  return alert('Yay! You pressed CTRL + Enter!');
 	};
-	var componentOnCancel = function componentOnCancel() {
+	var componentOnCancel = function componentOnCancel(e) {
 	  return alert('Oops. You pressed CTRL + Esc');
 	};
 
@@ -81,14 +81,12 @@
 	    ctrl: true,
 	    alt: false,
 	    shift: false,
-	    stop: true,
 	    fn: componentOnOk
 	  },
 	  cancel: {
 	    keyCode: 27,
 	    ctrl: true,
 	    alt: false,
-	    stop: true,
 	    fn: componentOnCancel
 	  }
 	};
@@ -21537,9 +21535,7 @@
 	          var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	          if (e.keyCode === options.keyCode && e.target.tagName === 'BODY' && (typeof options.ctrl !== 'undefined' ? options.ctrl ? e.ctrlKey : !e.ctrlKey : true) && (typeof options.alt !== 'undefined' ? options.alt ? e.altKey : !e.altKey : true) && (typeof options.shift !== 'undefined' ? options.shift ? e.shiftKey : !e.shiftKey : true)) {
-	            options.prevent && e.preventDefault();
-	            options.stop && e.stopPropagation();
-	            options.fn();
+	            options.fn(e);
 	          }
 	        }
 	      }, {

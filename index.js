@@ -27,9 +27,7 @@ exports.default = function (keymap) {
           var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
           if (e.keyCode === options.keyCode && e.target.tagName === 'BODY' && (typeof options.ctrl !== 'undefined' ? options.ctrl ? e.ctrlKey : !e.ctrlKey : true) && (typeof options.alt !== 'undefined' ? options.alt ? e.altKey : !e.altKey : true) && (typeof options.shift !== 'undefined' ? options.shift ? e.shiftKey : !e.shiftKey : true)) {
-            options.prevent && e.preventDefault();
-            options.stop && e.stopPropagation();
-            options.fn();
+            options.fn(e);
           }
         }
       }, {

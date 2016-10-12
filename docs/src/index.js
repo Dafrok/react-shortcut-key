@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import hotkey from '../../index.js'
 
-const componentOnOk = () => alert('Yay! You pressed CTRL + Enter!')
-const componentOnCancel = () => alert('Oops. You pressed CTRL + Esc')
+const componentOnOk = e => alert('Yay! You pressed CTRL + Enter!')
+const componentOnCancel = e => alert('Oops. You pressed CTRL + Esc')
 
 const keymap = {
   ok: {
@@ -11,14 +11,12 @@ const keymap = {
     ctrl: true,
     alt: false,
     shift: false,
-    stop: true,
     fn: componentOnOk
   },
   cancel: {
     keyCode: 27,
     ctrl: true,
     alt: false,
-    stop: true,
     fn: componentOnCancel
   }
 }
