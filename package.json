@@ -1,6 +1,6 @@
 {
   "name": "react-shortcut-key",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "Shortcut key wrapper for react components.",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,16 @@
     "type": "git",
     "url": "git+https://github.com/Dafrok/react-shortcut-key"
   },
+  "keywords": [
+    "react",
+    "hotkey",
+    "shortcut",
+    "key",
+    "shortcut key",
+    "hot key",
+    "react-hotkey",
+    "react-shortcut-key"
+  ],
   "author": "Dafrok <o.o@mug.dog>",
   "license": "MIT",
   "devDependencies": {

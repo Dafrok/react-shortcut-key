@@ -1,5 +1,5 @@
 # react-shortcut-key
-Hotkey wrapper for react components.
+Shortcut key wrapper for react components.
 
 # Install
 
@@ -14,7 +14,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import hotkey from 'react-shortcut-key'
 
-// Define shortcut key callback functions
+// Define callback functions of shortcut key
 const componentOnOk = e => alert('Yay! You pressed CTRL + Enter!')
 const componentOnCancel = e => alert('Oops. You pressed CTRL + Esc')
 
