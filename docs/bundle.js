@@ -72,7 +72,7 @@
 	  return alert('Yay! You pressed CTRL + Enter!');
 	};
 	var componentOnCancel = function componentOnCancel(e) {
-	  return alert('Oops. You pressed CTRL + Esc');
+	  return alert('Oops. You pressed CTRL + Esc.');
 	};
 
 	var keymap = {
@@ -21548,9 +21548,7 @@
 	              fn: keymap[name].fn,
 	              ctrl: keymap[name].ctrl,
 	              alt: keymap[name].alt,
-	              shift: keymap[name].shift,
-	              stop: keymap[name].stop,
-	              prevent: keymap[name].prevent
+	              shift: keymap[name].shift
 	            });
 	          }
 	        }

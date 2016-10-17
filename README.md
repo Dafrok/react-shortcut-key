@@ -16,7 +16,7 @@ import hotkey from 'react-shortcut-key'
 
 // Define callback functions of shortcut key
 const componentOnOk = e => alert('Yay! You pressed CTRL + Enter!')
-const componentOnCancel = e => alert('Oops. You pressed CTRL + Esc')
+const componentOnCancel = e => alert('Oops. You pressed CTRL + Esc.')
 
 // Define shortcut key map.
 const keymap = {

@@ -40,9 +40,7 @@ exports.default = function (keymap) {
               fn: keymap[name].fn,
               ctrl: keymap[name].ctrl,
               alt: keymap[name].alt,
-              shift: keymap[name].shift,
-              stop: keymap[name].stop,
-              prevent: keymap[name].prevent
+              shift: keymap[name].shift
             });
           }
         }

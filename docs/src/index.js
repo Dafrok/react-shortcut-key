@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import hotkey from '../../index.js'
 
 const componentOnOk = e => alert('Yay! You pressed CTRL + Enter!')
-const componentOnCancel = e => alert('Oops. You pressed CTRL + Esc')
+const componentOnCancel = e => alert('Oops. You pressed CTRL + Esc.')
 
 const keymap = {
   ok: {
