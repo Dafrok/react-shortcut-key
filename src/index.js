@@ -10,14 +10,14 @@ export default function (keymap) {
       }
       executeShortcut (e, options = {}) {
         const {keyCode, fn, ctrl, alt, shift, stop, prevent} = options
-        prevent && e.preventDefault()
-        stop && e.stopPropagation()
         if (e.keyCode === keyCode
           && e.target.tagName === 'BODY'
           && (typeof ctrl !== 'undefined' ? ctrl ? e.ctrlKey : !e.ctrlKey : true)
           && (typeof alt !== 'undefined' ? alt ? e.altKey : !e.altKey : true)
           && (typeof shift !== 'undefined'? shift ? e.shiftKey : !e.shiftKey : true)) {
-          options.fn(e)
+          prevent && e.preventDefault()
+          stop && e.stopPropagation()
+          fn(e)
         }
       }
       keyHandler (e) {
