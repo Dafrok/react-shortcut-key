@@ -15,24 +15,23 @@ import ReactDOM from 'react-dom'
 import hotkey from 'react-shortcut-key'
 
 // Define callback functions of shortcut key
-const componentOnOk = e => alert('Yay! You pressed CTRL + Enter!')
-const componentOnCancel = e => alert('Oops. You pressed CTRL + Esc.')
+const componentOnHello = e => alert('Hello! You pressed CTRL + Enter!')
+const componentOnBye = e => alert('Bye. You pressed CTRL + Esc.')
 
 // Define shortcut key map.
 const keymap = {
-  ok: {
-    keyCode: 13,
+  hello: {
+    key: 'enter',
     ctrl: true,
     alt: false,
     shift: false,
     meta: false,
-    fn: componentOnOk
+    fn: componentOnHello
   },
-  cancel: {
+  bye: {
     keyCode: 27,
-    ctrl: true,
-    alt: false,
-    fn: componentOnCancel
+    meta: true,
+    fn: componentOnBye
   }
 }
 
