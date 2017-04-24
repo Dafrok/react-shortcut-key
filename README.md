@@ -25,6 +25,7 @@ const keymap = {
     ctrl: true,
     alt: false,
     shift: false,
+    meta: false,
     fn: componentOnOk
   },
   cancel: {
@@ -57,4 +58,5 @@ ReactDOM.render(<ComponentWithHotkey />, rootNode)
 - `ctrl: true | false` Optional. Whether your callback function excutes by pressed the shortcut key and the 'CTRL' button down.
 - `alt: true | false` Optional. Whether your callback function excutes by pressed the shortcut key and the 'ALT' button down.
 - `shift: true | false` Optional. Whether your callback function excutes by pressed the shortcut key and the 'SHIFT' button down.
+- `meta: true | false` Optional. Whether your callback function excutes by pressed the shortcut key and the 'META' button down.
 - `fn:` Callback function of the shortcut key.
