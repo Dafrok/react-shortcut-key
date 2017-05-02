@@ -20,19 +20,8 @@ const componentOnBye = e => alert('Bye. You pressed CTRL + Esc.')
 
 // Define shortcut key map.
 const keymap = {
-  hello: {
-    key: 'enter',
-    ctrl: true,
-    alt: false,
-    shift: false,
-    meta: false,
-    fn: componentOnHello
-  },
-  bye: {
-    keyCode: 27,
-    meta: true,
-    fn: componentOnBye
-  }
+  'ctrl+enter': componentOnHello,
+  'meta+esc': componentOnBye
 }
 
 // Any component which will use shortcut keys
