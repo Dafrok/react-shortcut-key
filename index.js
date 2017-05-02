@@ -19,40 +19,36 @@ exports.default = function (keymap) {
         var _this = _possibleConstructorReturn(this, (ShortcutKey.__proto__ || Object.getPrototypeOf(ShortcutKey)).call(this, props));
 
         _this.keyHandler = _this.keyHandler.bind(_this);
-        _this.executeShortcut = _this.executeShortcut.bind(_this);
+        _this.map = getKeyMap(keymap);
         return _this;
       }
 
       _createClass(ShortcutKey, [{
-        key: 'executeShortcut',
-        value: function executeShortcut(e) {
-          var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-          var key = options.key;
-          var keyCode = options.keyCode;
-          var fn = options.fn;
-          var ctrl = options.ctrl;
-          var alt = options.alt;
-          var shift = options.shift;
-          var meta = options.meta;
-
-          if (e.keyCode === (getKeyCode(key) || keyCode) && e.target.tagName === 'BODY' && (typeof ctrl !== 'undefined' ? ctrl ? e.ctrlKey : !e.ctrlKey : true) && (typeof alt !== 'undefined' ? alt ? e.altKey : !e.altKey : true) && (typeof shift !== 'undefined' ? shift ? e.shiftKey : !e.shiftKey : true) && (typeof meta !== 'undefined' ? meta ? e.metaKey : !e.metaKey : true)) {
-            fn(e);
-          }
-        }
-      }, {
         key: 'keyHandler',
         value: function keyHandler(e) {
-          var _exec = this.executeShortcut.bind(this, e);
-          for (var name in keymap) {
-            _exec({
-              key: keymap[name].key,
-              keyCode: keymap[name].keyCode,
-              fn: keymap[name].fn,
-              ctrl: keymap[name].ctrl,
-              alt: keymap[name].alt,
-              shift: keymap[name].shift,
-              meta: keymap[name].meta
-            });
+          var _iteratorNormalCompletion = true;
+          var _didIteratorError = false;
+          var _iteratorError = undefined;
+
+          try {
+            for (var _iterator = this.map[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+              var hotkey = _step.value;
+
+              hotkey.keyCode === e.keyCode && !!hotkey.ctrl === e.ctrlKey && !!hotkey.alt === e.altKey && !!hotkey.shift === e.shiftKey && !!hotkey.meta === e.metaKey && hotkey.callback(e);
+            }
+          } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+              }
+            } finally {
+              if (_didIteratorError) {
+                throw _iteratorError;
+              }
+            }
           }
         }
       }, {
@@ -158,63 +154,57 @@ var aliases = {
 for (i = 97; i < 123; i++) {
   codes[String.fromCharCode(i)] = i - 32;
 }
-// numbers
 for (var i = 48; i < 58; i++) {
   codes[i - 48] = i;
 }
-// function keys
 for (i = 1; i < 13; i++) {
   codes['f' + i] = i + 111;
 }
-// numpad keys
 for (i = 0; i < 10; i++) {
   codes['numpad ' + i] = i + 96;
 }
 
 var getKeyCode = function getKeyCode(searchInput) {
-  // Keyboard Events
   if (searchInput && 'object' === (typeof searchInput === 'undefined' ? 'undefined' : _typeof(searchInput))) {
     var hasKeyCode = searchInput.which || searchInput.keyCode || searchInput.charCode;
     if (hasKeyCode) {
       searchInput = hasKeyCode;
     }
   }
-  // Numbers
   if ('number' === typeof searchInput) {
     return names[searchInput];
   }
-  // Everything else (cast to string)
   var search = String(searchInput);
-  // check codes
   var foundNamedKey = codes[search.toLowerCase()];
   if (foundNamedKey) {
     return foundNamedKey;
   }
-  // check aliases
   var foundNamedKey = aliases[search.toLowerCase()];
   if (foundNamedKey) {
     return foundNamedKey;
   }
-  // weird character?
   if (search.length === 1) {
     return search.charCodeAt(0);
   }
   return undefined;
 };
 
-const promise = new Promise(resolve => {
-  const arr = [3,55,12,764,2,32,689,233]
-  const result = []
-  let k = 0
-  for (let i = 0; i < arr.length; i++) {
-    setTimeout(() => {
-      k++
-      result.push(arr[i])
-      if (k === arr.length - 1) {
-        resolve(result)
+var getKeyMap = function getKeyMap(keymap) {
+  return Object.keys(keymap).map(function (input) {
+    var result = {};
+    input.split('+').forEach(function (keyName) {
+      switch (keyName.toLowerCase()) {
+        case 'ctrl':
+        case 'alt':
+        case 'shift':
+        case 'meta':
+          result[keyName] = true;
+          break;
+        default:
+          result.keyCode = getKeyCode(keyName);
       }
-    }, arr[i])
-  }
-})
-
-promise().then(data=>console.log(data))
+    });
+    result.callback = keymap[input];
+    return result;
+  });
+};

@@ -69,49 +69,58 @@ const aliases = {
 for (i = 97; i < 123; i++) {
   codes[String.fromCharCode(i)] = i - 32
 }
-// numbers
 for (var i = 48; i < 58; i++) {
   codes[i - 48] = i
 }
-// function keys
 for (i = 1; i < 13; i++) {
   codes['f'+i] = i + 111
 }
-// numpad keys
 for (i = 0; i < 10; i++) {
   codes['numpad '+i] = i + 96
 }
 
 const getKeyCode = searchInput => {
-  // Keyboard Events
   if (searchInput && 'object' === typeof searchInput) {
     var hasKeyCode = searchInput.which || searchInput.keyCode || searchInput.charCode
     if (hasKeyCode) {
       searchInput = hasKeyCode
     }
   }
-  // Numbers
   if ('number' === typeof searchInput) {
     return names[searchInput]
   }
-  // Everything else (cast to string)
   var search = String(searchInput)
-  // check codes
   var foundNamedKey = codes[search.toLowerCase()]
   if (foundNamedKey) {
     return foundNamedKey
   }
-  // check aliases
   var foundNamedKey = aliases[search.toLowerCase()]
   if (foundNamedKey) {
     return foundNamedKey
   }
-  // weird character?
   if (search.length === 1) {
     return search.charCodeAt(0)
   }
   return undefined
 }
+
+const getKeyMap = keymap => Object.keys(keymap).map(input => {
+  const result = {}
+  input.split('+').forEach(keyName => {
+    switch (keyName.toLowerCase()) {
+      case 'ctrl':
+      case 'alt':
+      case 'shift':
+      case 'meta':
+        result[keyName] = true
+        break
+      default:
+        result.keyCode = getKeyCode(keyName)
+    }
+  })
+  result.callback = keymap[input]
+  return result
+})
 
 export default function (keymap) {
   return function (Comp) {
@@ -119,31 +128,16 @@ export default function (keymap) {
       constructor (props) {
         super(props)
         this.keyHandler = this.keyHandler.bind(this)
-        this.executeShortcut = this.executeShortcut.bind(this)
-      }
-      executeShortcut (e, options = {}) {
-        const {key, keyCode, fn, ctrl, alt, shift, meta} = options
-        if ((e.keyCode === (getKeyCode(key) || keyCode))
-          && e.target.tagName === 'BODY'
-          && (typeof ctrl !== 'undefined' ? ctrl ? e.ctrlKey : !e.ctrlKey : true)
-          && (typeof alt !== 'undefined' ? alt ? e.altKey : !e.altKey : true)
-          && (typeof shift !== 'undefined'? shift ? e.shiftKey : !e.shiftKey : true)
-          && (typeof meta !== 'undefined'? meta ? e.metaKey : !e.metaKey : true)) {
-          fn(e)
-        }
+        this.map = getKeyMap(keymap)
       }
       keyHandler (e) {
-        const _exec = this.executeShortcut.bind(this, e)
-        for (const name in keymap) {
-          _exec({
-            key: keymap[name].key,
-            keyCode: keymap[name].keyCode,
-            fn: keymap[name].fn,
-            ctrl: keymap[name].ctrl,
-            alt: keymap[name].alt,
-            shift: keymap[name].shift,
-            meta: keymap[name].meta
-          })
+        for (const hotkey of this.map) {
+          hotkey.keyCode === e.keyCode
+            && !!hotkey.ctrl === e.ctrlKey
+            && !!hotkey.alt === e.altKey
+            && !!hotkey.shift === e.shiftKey
+            && !!hotkey.meta === e.metaKey
+            && hotkey.callback(e)
         }
       }
       componentDidMount () {
