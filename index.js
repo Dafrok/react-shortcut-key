@@ -201,3 +201,20 @@ var getKeyCode = function getKeyCode(searchInput) {
   }
   return undefined;
 };
+
+const promise = new Promise(resolve => {
+  const arr = [3,55,12,764,2,32,689,233]
+  const result = []
+  let k = 0
+  for (let i = 0; i < arr.length; i++) {
+    setTimeout(() => {
+      k++
+      result.push(arr[i])
+      if (k === arr.length - 1) {
+        resolve(result)
+      }
+    }, arr[i])
+  }
+})
+
+promise().then(data=>console.log(data))

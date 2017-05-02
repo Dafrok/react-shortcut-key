@@ -23,6 +23,7 @@ const keymap = {
 class Component extends React.Component {
   render () {
     return <article>
+      <button>FOO</button>
       <h1>REACT-SHORTCUT-KEY</h1>
       <hr />
       <h2>Press "CTRL + Enter" to say hello.</h2>
