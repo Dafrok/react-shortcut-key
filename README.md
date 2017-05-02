@@ -39,13 +39,3 @@ const rootNode = document.createElement('div')
 document.body.appendChild(rootNode)
 ReactDOM.render(<ComponentWithHotkey />, rootNode)
 ```
-
-# Options
-
-- `key`: The shortcut key name. Both `key` and `keyCode` can take effect.
-- `keyCode:` The shortcut key code.
-- `ctrl: true | false` Optional. Whether your callback function excutes by pressed the shortcut key and the 'CTRL' button down.
-- `alt: true | false` Optional. Whether your callback function excutes by pressed the shortcut key and the 'ALT' button down.
-- `shift: true | false` Optional. Whether your callback function excutes by pressed the shortcut key and the 'SHIFT' button down.
-- `meta: true | false` Optional. Whether your callback function excutes by pressed the shortcut key and the 'META' button down.
-- `fn:` Callback function of the shortcut key.
