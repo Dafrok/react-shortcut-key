@@ -16,7 +16,7 @@ import hotkey from 'react-shortcut-key'
 
 // Define callback functions of shortcut key
 const componentOnHello = e => alert('Hello! You pressed CTRL + Enter!')
-const componentOnBye = e => alert('Bye. You pressed CTRL + Esc.')
+const componentOnBye = e => alert('Bye. You pressed META + Esc.')
 
 // Define shortcut key map.
 const keymap = {
@@ -27,7 +27,7 @@ const keymap = {
 // Any component which will use shortcut keys
 class Component extends React.Component {
   render () {
-    return <div>Press "CTRL + Enter" or "CTRL + Esc" to alert messages.</div>
+    return <div>Press "CTRL + Enter" or "META + Esc" to alert messages.</div>
   }
 }
 
