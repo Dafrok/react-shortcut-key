@@ -1,13 +1,17 @@
 # react-shortcut-key
 Shortcut key wrapper for react components.
 
-# Install
+## Demo
+
+https://dafrok.github.io/react-shortcut-key/
+
+## Install
 
 ```
 npm install react-shortcut-key
 ```
 
-# Usage
+## Usage
 
 ```javascript
 import React from 'react'
@@ -39,3 +43,7 @@ const rootNode = document.createElement('div')
 document.body.appendChild(rootNode)
 ReactDOM.render(<ComponentWithHotkey />, rootNode)
 ```
+
+## License
+
+[MIT License](https://github.com/Dafrok/react-shortcut-key/blob/master/LICENSE)
