@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import hotkey from '../../src/index.js'
+import 'github-markdown-css'
 
 const componentOnHello = e => alert('Hello! You pressed CTRL + Enter!')
 const componentOnBye = e => alert('Bye! You pressed CTRL + Esc.')
@@ -12,20 +13,19 @@ const keymap = {
 
 class Component extends React.Component {
   render () {
-    return <article>
+    return <article className="markdown-body">
       <h1>REACT-SHORTCUT-KEY</h1>
-      <hr />
-      <h2>Press "CTRL + Enter" to say hello.</h2>
+      <h2>Examples</h2>
+      <h3>Press "CTRL + Enter" to say hello.</h3>
       <pre>
         <code>{
-`
-const componentOnHello = e => alert('Hello! You pressed CTRL + Enter!')
+`const componentOnHello = e => alert('Hello! You pressed CTRL + Enter!')
 const keymap = {
   'ctrl+enter': componentOnHello
 }`}
         </code>
       </pre>
-      <h2>Press "META + Esc" to alert bye.</h2>
+      <h3>Press "META + Esc" to alert bye.</h3>
       <pre>
         <code>{
 `const componentOnBye = e => alert('Bye! You pressed CTRL + Esc.')

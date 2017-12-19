@@ -5,7 +5,7 @@ Shortcut key wrapper for react components.
 
 https://dafrok.github.io/react-shortcut-key/
 
-## Install
+## Installation
 
 ```
 npm install react-shortcut-key
