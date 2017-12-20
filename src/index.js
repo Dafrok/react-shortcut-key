@@ -9,6 +9,8 @@ export default function (keymap) {
         this.executeShortcut = this.executeShortcut.bind(this)
       }
       executeShortcut (e, options = {}) {
+        options.prevent && e.preventDefault()
+        options.stop && e.stopPropagation()
         if (e.keyCode === options.keyCode
           && e.target.tagName === 'BODY'
           && (typeof options.ctrl !== 'undefined' ? options.ctrl ? e.ctrlKey : !e.ctrlKey : true)
@@ -25,7 +27,9 @@ export default function (keymap) {
             fn: keymap[name].fn,
             ctrl: keymap[name].ctrl,
             alt: keymap[name].alt,
-            shift: keymap[name].shift
+            shift: keymap[name].shift,
+            prevent: keymap[name].prevent,
+            stop: keymap[name].stop
           })
         }
       }
