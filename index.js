@@ -26,6 +26,8 @@ exports.default = function (keymap) {
         value: function executeShortcut(e) {
           var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+          options.prevent && e.preventDefault();
+          options.stop && e.stopPropagation();
           if (e.keyCode === options.keyCode && e.target.tagName === 'BODY' && (typeof options.ctrl !== 'undefined' ? options.ctrl ? e.ctrlKey : !e.ctrlKey : true) && (typeof options.alt !== 'undefined' ? options.alt ? e.altKey : !e.altKey : true) && (typeof options.shift !== 'undefined' ? options.shift ? e.shiftKey : !e.shiftKey : true)) {
             options.fn(e);
           }
@@ -40,7 +42,9 @@ exports.default = function (keymap) {
               fn: keymap[name].fn,
               ctrl: keymap[name].ctrl,
               alt: keymap[name].alt,
-              shift: keymap[name].shift
+              shift: keymap[name].shift,
+              prevent: keymap[name].prevent,
+              stop: keymap[name].stop
             });
           }
         }
