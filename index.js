@@ -25,10 +25,17 @@ exports.default = function (keymap) {
         key: 'executeShortcut',
         value: function executeShortcut(e) {
           var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+          var keyCode = options.keyCode;
+          var fn = options.fn;
+          var ctrl = options.ctrl;
+          var alt = options.alt;
+          var shift = options.shift;
+          var stop = options.stop;
+          var prevent = options.prevent;
 
-          options.prevent && e.preventDefault();
-          options.stop && e.stopPropagation();
-          if (e.keyCode === options.keyCode && e.target.tagName === 'BODY' && (typeof options.ctrl !== 'undefined' ? options.ctrl ? e.ctrlKey : !e.ctrlKey : true) && (typeof options.alt !== 'undefined' ? options.alt ? e.altKey : !e.altKey : true) && (typeof options.shift !== 'undefined' ? options.shift ? e.shiftKey : !e.shiftKey : true)) {
+          prevent && e.preventDefault();
+          stop && e.stopPropagation();
+          if (e.keyCode === keyCode && e.target.tagName === 'BODY' && (typeof ctrl !== 'undefined' ? ctrl ? e.ctrlKey : !e.ctrlKey : true) && (typeof alt !== 'undefined' ? alt ? e.altKey : !e.altKey : true) && (typeof shift !== 'undefined' ? shift ? e.shiftKey : !e.shiftKey : true)) {
             options.fn(e);
           }
         }

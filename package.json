@@ -1,6 +1,6 @@
 {
   "name": "react-shortcut-key",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Shortcut key wrapper for react components.",
   "main": "index.js",
   "scripts": {

@@ -9,13 +9,14 @@ export default function (keymap) {
         this.executeShortcut = this.executeShortcut.bind(this)
       }
       executeShortcut (e, options = {}) {
-        options.prevent && e.preventDefault()
-        options.stop && e.stopPropagation()
-        if (e.keyCode === options.keyCode
+        const {keyCode, fn, ctrl, alt, shift, stop, prevent} = options
+        prevent && e.preventDefault()
+        stop && e.stopPropagation()
+        if (e.keyCode === keyCode
           && e.target.tagName === 'BODY'
-          && (typeof options.ctrl !== 'undefined' ? options.ctrl ? e.ctrlKey : !e.ctrlKey : true)
-          && (typeof options.alt !== 'undefined' ? options.alt ? e.altKey : !e.altKey : true)
-          && (typeof options.shift !== 'undefined'? options.shift ? e.shiftKey : !e.shiftKey : true)) {
+          && (typeof ctrl !== 'undefined' ? ctrl ? e.ctrlKey : !e.ctrlKey : true)
+          && (typeof alt !== 'undefined' ? alt ? e.altKey : !e.altKey : true)
+          && (typeof shift !== 'undefined'? shift ? e.shiftKey : !e.shiftKey : true)) {
           options.fn(e)
         }
       }
